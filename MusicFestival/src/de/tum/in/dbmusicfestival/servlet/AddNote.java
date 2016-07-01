@@ -12,27 +12,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import de.tum.in.dbmusicfestival.model.NoteDAO;
 import de.tum.in.dbmusicfestival.exception.MusicFestivalException;
-import de.tum.in.dbmusicfestival.model.EmployeeDAO;
 
-@webServlet("/addEmployee")
-public class AddEmployee extends HttpServlet {
+@WebServlet("/addNote")
+public class AddNote {
 	private static final long serialVersionUID = 1L;
 	
-	public AddEmployee(){
+	public AddNote(){
 		super();
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
-		EmployeeDAO employeeDAO = new EmployeeDAO();
+		NoteDAO noteDAO = new NoteDAO();
 		
 		try{
 			
-			employeeDAO.addNewEmployee();
+			noteDAO.addNote();
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("");
-    		dispatcher.forward(request, response);	
+    		dispatcher.forward(request, response);
 			
 		}
 		catch(ClassNotFoundException|SQLException|MusicFestivalException e){
@@ -40,6 +40,7 @@ public class AddEmployee extends HttpServlet {
 			request.setAttribute("error", e.toString() + e.getMessage());
 			e.printStackTrace();
 		}
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

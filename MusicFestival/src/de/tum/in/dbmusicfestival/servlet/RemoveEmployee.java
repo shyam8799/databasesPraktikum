@@ -15,21 +15,21 @@ import javax.servlet.http.HttpSession;
 import de.tum.in.dbmusicfestival.exception.MusicFestivalException;
 import de.tum.in.dbmusicfestival.model.EmployeeDAO;
 
-@webServlet("/addEmployee")
-public class AddEmployee extends HttpServlet {
+@WebServlet("/removeEmployee")
+public class RemoveEmployee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public AddEmployee(){
+	public RemoveEmployee(){
 		super();
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		EmployeeDAO employeeDAO = new EmployeeDAO();
 		
 		try{
 			
-			employeeDAO.addNewEmployee();
+			employeeDAO.removeEmployee();
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("");
     		dispatcher.forward(request, response);	
@@ -39,7 +39,9 @@ public class AddEmployee extends HttpServlet {
 			
 			request.setAttribute("error", e.toString() + e.getMessage());
 			e.printStackTrace();
+			
 		}
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

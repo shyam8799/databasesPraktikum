@@ -13,7 +13,7 @@ import de.tum.in.dbmusicfestival.exception.MusicFestivalException;
 
 public class EmployeeDAO {
 
-	public boolean addNewEmployee(int eid, int rid, int oid, String firstname, String lastname, String iban) throws ClassNotFoundException, SQLException, MusicFestivalException{
+	public boolean addNewEmployee(Employee employee) throws ClassNotFoundException, SQLException, MusicFestivalException{
 		
 		String query = "INSERT INTO employee VALUES(?, ?, ?, ?, ?, ?);";
 		
@@ -22,12 +22,12 @@ public class EmployeeDAO {
 		con.setAutoCommit(false);
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setInt(1, eid);
-		pstmt.setInt(2, rid);
-		pstmt.setInt(3, oid);
-		pstmt.setString(4, firstname);
-		pstmt.setString(5, lastname);
-		pstmt.setString(6, iban);
+		pstmt.setInt(1, employee.geteId());
+		pstmt.setInt(2, employee.getrId());
+		pstmt.setInt(3, employee.getoId());
+		pstmt.setString(4, employee.getFirstName());
+		pstmt.setString(5, employee.getLastName());
+		pstmt.setString(6, employee.getIBAN());
 		
 		pstmt.executeUpdate();
 		
@@ -35,6 +35,26 @@ public class EmployeeDAO {
 		con.close();
 		
 		return true;
+	}
+	
+	public boolean removeEmployee(Employee employee) throws ClassNotFoundException, SQLException, MusicFestivalException{
+		
+		String query = "DELETE FROM employee WHERE eid = ?";
+		
+		Class.forName("org.postgresql.Driver");
+		Connection con = DBConfiguration.createConnection();
+		con.setAutoCommit(false);
+		
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, employee.geteId());
+		
+		pstmt.executeUpdate();
+		
+		pstmt.close();
+		con.close();
+		
+		return true;
+		
 	}
 	
 }
