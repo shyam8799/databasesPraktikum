@@ -4,7 +4,7 @@ public class Shop {
 	private int shopId;
 	private String name;
 	private String area;
-	private char ownerType;
+	private String ownerType;
 	public int getShopId() {
 		return shopId;
 	}
@@ -23,10 +23,10 @@ public class Shop {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public char getOwnerType() {
+	public String getOwnerType() {
 		return ownerType;
 	}
-	public void setOwnerType(char ownerType) {
+	public void setOwnerType(String ownerType) {
 		this.ownerType = ownerType;
 	}
 	

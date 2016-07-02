@@ -12,21 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import de.tum.in.dbmusicfestival.bean.Sponsor;
+import de.tum.in.dbmusicfestival.bean.Item;
 import de.tum.in.dbmusicfestival.exception.MusicFestivalException;
-import de.tum.in.dbmusicfestival.model.SponsorDAO;
+import de.tum.in.dbmusicfestival.model.ItemDAO;
 
 /**
  * Servlet implementation class FetchBands
  */
-@WebServlet("/fetchSponsors")
-public class FetchSponsors extends HttpServlet {
+@WebServlet("/fetchItems")
+public class FetchItems extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FetchSponsors() {
+    public FetchItems() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,11 +41,11 @@ public class FetchSponsors extends HttpServlet {
 		if(email==null){
 			
 		}*/
-		SponsorDAO sponsorDAO = new SponsorDAO();
+		ItemDAO itemDAO = new ItemDAO();
 		try {
-			List<Sponsor> sponsorsPresent = sponsorDAO.fetchSponsorsAvailable();
-			request.setAttribute("sponsorspresent", sponsorsPresent);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/displaySponsors.jsp");
+			List<Item> itemsList = itemDAO.fetchItemsList();
+			request.setAttribute("itemslist", itemsList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/displayItems.jsp");
     		dispatcher.forward(request, response);	
 		} catch (ClassNotFoundException|SQLException|MusicFestivalException e) {
 			request.setAttribute("error", e.toString() + e.getMessage());
